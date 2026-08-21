@@ -1,6 +1,6 @@
 # miragate
 
-轻量的本地网关：登录后启动一个本地反向代理，供 Claude Code 等使用 Anthropic 接口的
+轻量的 Mirasim 本地网关：登录后启动一个本地反向代理，供 Claude Code 等使用 Anthropic 接口的
 CLI 直接接入；并附带一个用量页查看真实额度。单静态二进制 / 单容器，部署简单。
 
 ---
