@@ -9,15 +9,8 @@ CLI 直接接入；并附带一个用量页查看真实额度。单静态二进�
 
 ### 1. 准备
 
+直接 `git clone` 本仓库，有现成可用的 `docker-compose.yaml`
 镜像由 GitHub Actions 构建并推送到 GHCR：`ghcr.io/dotracel/miragate`
-（若 fork 到自己的仓库，把 `docker-compose.yml` 里的镜像地址换成你的即可）。
-
-私有镜像需先登录 GHCR：
-
-```bash
-echo <你的GitHubToken> | docker login ghcr.io -u <你的用户名> --password-stdin
-docker compose pull
-```
 
 > 也可不用镜像、本地构建：把 compose 里的 `image:` 注释掉，启用 `build: .`。
 
@@ -48,6 +41,8 @@ export ANTHROPIC_BASE_URL=http://<主机IP>:8788
 export ANTHROPIC_AUTH_TOKEN=placeholder   # 占位即可
 claude
 ```
+
+或者你也可以使用 CLIProxyAPI / Sub2API / NewAPI 进行接入。
 
 ### 5. 常用运维
 
@@ -104,8 +99,3 @@ go build -ldflags="-s -w" -o miragate ./cmd/miragate
 | `miragate status` | 查看登录态与实时用量 |
 | `miragate logout` | 退出登录 |
 | `miragate env` | 输出供 CLI 使用的环境变量 |
-
-## 说明
-
-- 需要有效账户方能登录；本工具不绕过任何鉴权。
-- 数据卷 `miragate-data`（容器内 `/data`）保存登录凭据，请勿泄露。
