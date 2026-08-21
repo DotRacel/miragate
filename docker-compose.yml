@@ -10,15 +10,16 @@ services:
       - "8788:8788"          # 反代 + 用量页
     volumes:
       - miragate-data:/data  # 持久化登录凭据（config.json / device.json）
+    # 注意：environment 用字典形式（KEY: value），各行须保持 6 空格缩进对齐。
     environment:
-      # ── 出站代理（可选）：http / https / socks5 均支持 ──
-      # 只需设置其一即可；ALL_PROXY 会自动回退为 HTTP/HTTPS 代理。
-      # - HTTP_PROXY=http://proxy-host:8080
-      # - HTTPS_PROXY=http://proxy-host:8080
-      # - ALL_PROXY=socks5://proxy-host:1080
-      # 带认证：socks5://user:pass@proxy-host:1080
-      # - NO_PROXY=localhost,127.0.0.1
       TZ: Asia/Shanghai
+      # ── 出站代理（可选）：http / https / socks5，按需取消注释其一 ──
+      # ALL_PROXY 会自动回退为 HTTP/HTTPS 代理。
+      # HTTP_PROXY: http://proxy-host:8080
+      # HTTPS_PROXY: http://proxy-host:8080
+      # ALL_PROXY: socks5://proxy-host:1080
+      # 带认证：ALL_PROXY: socks5://user:pass@proxy-host:1080
+      # NO_PROXY: localhost,127.0.0.1
     command: ["serve", "--listen", "0.0.0.0:8788"]
 
 volumes:
